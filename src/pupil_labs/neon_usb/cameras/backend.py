@@ -1,10 +1,13 @@
 import time
 from abc import ABC, abstractmethod
 from pathlib import Path
+from typing import Any
 
 import cv2
 import numpy as np
 import uvc
+from typing_extensions import Self
+
 from pyrav4l2 import Device, v4l2
 
 from ..frame import Frame
@@ -24,19 +27,17 @@ class CameraBackend(ABC):
     def close(self) -> None:
         pass
 
-    @abstractmethod
-    def set_eye_exposure(self, eyeID, value) -> None:
-        pass
-
-    def __enter__(self):
+    def __enter__(self) -> Self:
         return self
 
-    def __exit__(self, *args, **kwargs):
+    def __exit__(self, *args: Any, **kwargs: Any) -> None:
         self.close()
 
 
 class UVCBackend(CameraBackend):
-    def __init__(self, spec: CameraSpec, extended_controls=None):
+    _uvc_capture: uvc.Capture
+
+    def __init__(self, spec: CameraSpec, extended_controls: Any = None):
         super().__init__(spec)
 
         self._uvc_capture = None
@@ -47,7 +48,10 @@ class UVCBackend(CameraBackend):
         connected_devices = uvc.device_list()
         uid = None
         for device_info in connected_devices:
-            if device_info["name"] == self.spec.name:
+            if (device_info["idVendor"], device_info["idProduct"]) == (
+                self.spec.vendor_id,
+                self.spec.product_id,
+            ):
                 uid = device_info["uid"]
                 break
 
@@ -84,23 +88,13 @@ class UVCBackend(CameraBackend):
         frame = self._uvc_capture.get_frame(timeout=2.0)
         frame.timestamp = self.last_frame_timestamp = uvc.get_time_monotonic()
         assert frame is not None
-        return frame
+        return Frame(frame.img, frame.timestamp, frame.index)
 
     def close(self) -> None:
         if self._uvc_capture is not None:
             self._uvc_capture.close()
             del self._uvc_capture
         self._uvc_capture = None
-
-    def set_eye_exposure(self, side_idx, exposure_time) -> None:
-        if self.exposure_controls is None:
-            uvc_controls = {c.display_name: c for c in self._uvc_capture.controls}
-            self.exposure_controls = (
-                uvc_controls["Primary Sensor Exposure"],
-                uvc_controls["Secondary Sensor Exposure"],
-            )
-
-        self.exposure_controls[side_idx].value = int(exposure_time)
 
 
 class V4l2Backend(CameraBackend):
@@ -111,25 +105,23 @@ class V4l2Backend(CameraBackend):
         self.device = None
         self.frame_counter = -1
 
+        errors = {}
         for device_path in Path("/dev/").glob("video*"):
             try:
                 device = Device(device_path)
-            except AttributeError:
-                continue
-            except FileNotFoundError:
-                continue
-            except PermissionError:
+            except (AttributeError, FileNotFoundError, PermissionError) as e:
+                errors[device_path] = e
                 continue
 
             if self.spec.name in device.device_name and device.is_video_capture_capable:
-                formats = []
-                for color_format, frame_sizes in device.available_formats.items():
-                    for frame_size in frame_sizes:
-                        for frame_interval in device.get_available_frame_intervals(
-                            color_format, frame_size
-                        ):
-                            formats.append((color_format, frame_size, frame_interval))
-
+                formats = [
+                    (color_format, frame_size, frame_interval)
+                    for color_format, frame_sizes in device.available_formats.items()
+                    for frame_size in frame_sizes
+                    for frame_interval in device.get_available_frame_intervals(
+                        color_format, frame_size
+                    )
+                ]
                 for color_format, frame_size, frame_interval in formats:
                     fps = frame_interval.denominator / frame_interval.numerator
                     if (frame_size.width, frame_size.height, fps) == (
@@ -142,7 +134,8 @@ class V4l2Backend(CameraBackend):
                         self.device = device
                         self.stream = V4lStream(self.device)
                         self.stream.open()
-                        self._fd = open(self.device.path)
+                        with open(self.device.path) as f:
+                            self._fd = f
                         self.color_format, _ = self.device.get_format()
 
                         break
@@ -172,6 +165,3 @@ class V4l2Backend(CameraBackend):
 
     def close(self) -> None:
         self._fd.close()
-
-    def set_eye_exposure(self, side_idx, exposure_time) -> None:
-        self.exposure_controls[side_idx].value = int(exposure_time)

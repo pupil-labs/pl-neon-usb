@@ -13,4 +13,3 @@ python_package_import_name: neon_usb
 repository_name: pl-neon-usb
 repository_namespace: pupil-labs
 repository_provider: github.com
-

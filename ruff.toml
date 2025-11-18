@@ -1,4 +1,5 @@
 fix = true
+extend-exclude = ["pyrav4l2"]
 
 [lint]
 extend-select = [

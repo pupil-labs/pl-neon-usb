@@ -1,19 +1,24 @@
-import numpy as np
 import usb.core
 import usb.util
+
+from pupil_labs.neon_recording.calib import Calibration
 
 VC_READ_CALIRATION_DATA = 0xD4
 CALIBRATION_DATA_LENGTH = 1024
 CALIBRATION_DATA_CHUNK_SIZE = 64
+USB_ID_VENDOR = 0x16D0
+USB_ID_PRODUCT = 0x11D3
 
 
-def _read_calibration_data_chunk(dev, offset):
+def _read_calibration_data_chunk(dev: usb.core.Device, offset: int) -> bytes:
     """Read calibration data chunk from device
 
-    Arguments:
-    dev -- the pyusb device to read from
+    Args:
+        dev: the pyusb device to read from
+        offset: the offset in bytes to read from
 
-    Returns the data chunk as byte array
+    Returns:
+        the data chunk as byte array
 
     """
     data = dev.ctrl_transfer(
@@ -25,63 +30,33 @@ def _read_calibration_data_chunk(dev, offset):
     if len(data) != CALIBRATION_DATA_CHUNK_SIZE:
         raise OSError("Reading 64 bytes from VC_READ_CALIRATION_DATA failed")
 
-    return data
+    return bytes(data)
 
 
-def _read_calibration_data(dev=None):
+def _read_calibration_data(dev: usb.core.Device | None = None) -> bytes:
     """Read full calibration data block from device
 
     Arguments:
-    dev -- the pyusb device to read from
+        dev: the pyusb device to read from
 
-    Return a byte array containing the calibration data
+    Returns:
+        byte array containing the calibration data
 
     """
     if dev is None:
         dev = _find_neon()
 
-    data = []
-    for offset in range(0, CALIBRATION_DATA_LENGTH, CALIBRATION_DATA_CHUNK_SIZE):
-        data.extend(_read_calibration_data_chunk(dev, offset))
-
-    return bytes(data)
-
-
-def _parse_calibration_data(data):
-    calib_data = _read_calibration_data()
-    calib_descriptor = np.dtype([
-        ("version", "u1"),
-        ("serial", "6a"),
-        ("scene_camera_matrix", "(3,3)d"),
-        ("scene_distortion_coefficients", "8d"),
-        ("scene_extrinsics_affine_matrix", "(4,4)d"),
-        ("right_camera_matrix", "(3,3)d"),
-        ("right_distortion_coefficients", "8d"),
-        ("right_extrinsics_affine_matrix", "(4,4)d"),
-        ("left_camera_matrix", "(3,3)d"),
-        ("left_distortion_coefficients", "8d"),
-        ("left_extrinsics_affine_matrix", "(4,4)d"),
-        ("crc", "u4"),
+    data = b"".join([
+        _read_calibration_data_chunk(dev, offset)
+        for offset in range(0, CALIBRATION_DATA_LENGTH, CALIBRATION_DATA_CHUNK_SIZE)
     ])
-    calibration_data = np.frombuffer(
-        calib_data[: calib_descriptor.itemsize], calib_descriptor
-    )
 
-    return {
-        field_name: calibration_data[field_name][0]
-        for field_name in calib_descriptor.names
-    }
+    return data
 
 
-def _find_neon():
-    return usb.core.find(idVendor=0x16D0, idProduct=0x11D3)
+def _find_neon() -> usb.core.Device:
+    return usb.core.find(idVendor=USB_ID_VENDOR, idProduct=USB_ID_PRODUCT)
 
 
-def get_intrinsics_data():
-    calib_data = _parse_calibration_data(_read_calibration_data())
-    intrinsics = (
-        calib_data["scene_camera_matrix"],
-        calib_data["scene_distortion_coefficients"],
-    )
-
-    return intrinsics
+def get_calibration() -> Calibration:
+    return Calibration.from_buffer(_read_calibration_data())
