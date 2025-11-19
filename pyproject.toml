@@ -26,9 +26,6 @@ dependencies = [
     "pyusb>=1.3.1",
 ]
 
-[project.optional-dependencies]
-examples = ["opencv-python", "tqdm"]
-
 [project.urls]
 Homepage = "https://pupil-labs.github.io/pl-neon-usb"
 Documentation = "https://pupil-labs.github.io/pl-neon-usb"
@@ -36,8 +33,12 @@ Repository = "https://github.com/pupil-labs/pl-neon-usb"
 Issues = "https://github.com/pupil-labs/pl-neon-usb/issues"
 
 
-[tool.uv]
-dev-dependencies = [
+[build-system]
+requires = ["hatchling", "uv-dynamic-versioning"]
+build-backend = "hatchling.build"
+
+[dependency-groups]
+dev = [
     "pytest>=8.2",
     "pre-commit>=2.20.0",
     "mypy>=0.991",
@@ -63,10 +64,9 @@ dev-dependencies = [
     # YORE: EOL 3.10: Remove line.
     "tomli>=2.0; python_version < '3.11'",
 ]
-
-[build-system]
-requires = ["hatchling", "uv-dynamic-versioning"]
-build-backend = "hatchling.build"
+examples = [
+    "tqdm>=4.67.1",
+]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
