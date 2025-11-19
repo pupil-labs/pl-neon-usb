@@ -23,6 +23,7 @@ dependencies = [
     "opencv-python>=4.11.0.86",
     "pupil-labs-neon-recording",
     "pupil-labs-uvc>=1.0.0",
+    "pyrav4l2",
     "pyusb>=1.3.1",
 ]
 
@@ -83,9 +84,13 @@ source = ["pupil_labs"]
 DEP001 = ["pupil_labs", "cv2"]
 DEP002 = ["opencv-python"]
 DEP003 = ["pupil_labs", "typing_extensions"]
+DEP004 = ["tqdm"]
 
 [tool.hatch.version]
 source = "uv-dynamic-versioning"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/pupil_labs"]
+
+[tool.uv.sources]
+pyrav4l2 = { git = "https://github.com/antmicro/pyrav4l2.git" }
