@@ -59,4 +59,5 @@ def _find_neon() -> usb.core.Device:
 
 
 def get_calibration() -> Calibration:
-    return Calibration.from_buffer(_read_calibration_data())
+    data = _read_calibration_data()
+    return Calibration.from_buffer(data[: Calibration.dtype.itemsize])
