@@ -1,5 +1,5 @@
 # Changes here will be overwritten by Copier
-_commit: 8f49154
+_commit: c84857f
 _src_path: git@github.com:pupil-labs/pl-template.git
 author_email: info@pupil-labs.com
 author_fullname: Pupil Labs GmbH
@@ -8,7 +8,7 @@ copyright_license: MIT
 debug_module: false
 project_description: Library for connecting to Neon via USB
 project_name: Neon USB
-publish_to_pypi: false
+publish_to_pypi: true
 python_package_distribution_name: pupil-labs-neon-usb
 python_package_import_name: neon_usb
 repository_name: pl-neon-usb
