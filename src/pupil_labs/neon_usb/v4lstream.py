@@ -3,8 +3,8 @@ from fcntl import ioctl
 from select import select
 from typing import Any
 
-from pyrav4l2 import v4l2
-from pyrav4l2.stream import Stream
+from pupil_labs.neon_usb.pyrav4l2 import v4l2
+from pupil_labs.neon_usb.pyrav4l2.stream import Stream
 
 
 class V4lStream(Stream):

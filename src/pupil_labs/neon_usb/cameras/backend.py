@@ -8,7 +8,7 @@ import numpy as np
 import uvc
 from typing_extensions import Self
 
-from pyrav4l2 import Device, v4l2
+from pupil_labs.neon_usb.pyrav4l2 import Device, v4l2
 
 from ..frame import Frame
 from ..v4lstream import V4lStream

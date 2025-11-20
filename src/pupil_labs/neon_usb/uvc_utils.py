@@ -3,7 +3,7 @@ from fcntl import ioctl
 from io import TextIOWrapper
 from typing import Any, ClassVar
 
-from pyrav4l2 import v4l2
+from pupil_labs.neon_usb.pyrav4l2 import v4l2
 
 UVC_RC_UNDEFINED = 0x00
 UVC_SET_CUR = 0x01
