@@ -134,8 +134,7 @@ class V4l2Backend(CameraBackend):
                         self.device = device
                         self.stream = V4lStream(self.device)
                         self.stream.open()
-                        with open(self.device.path) as f:
-                            self._fd = f
+                        self._fd = open(self.device.path)  # noqa: SIM115
                         self.color_format, _ = self.device.get_format()
 
                         break
