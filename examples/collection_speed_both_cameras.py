@@ -4,8 +4,13 @@ from threading import Event, Thread
 
 from tqdm import tqdm
 
-from pupil_labs.neon_usb import EyeCamera, Frame, SceneCamera
-from pupil_labs.neon_usb.test_utils import get_all_items, image_receiver
+from pupil_labs.neon_usb import (
+    EyeCamera,
+    Frame,
+    SceneCamera,
+    get_all_items,
+    image_receiver,
+)
 
 eye_start_event = Event()
 eye_stop_event = Event()

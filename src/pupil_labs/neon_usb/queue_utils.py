@@ -1,3 +1,4 @@
+import contextlib
 import queue
 from threading import Event
 from typing import TypeVar
@@ -36,5 +37,6 @@ def image_receiver(
         if stop_event.is_set():
             cam.close()
             break
-        eye_img = cam.get_frame()
-        output_q.put_nowait(eye_img)
+        image = cam.get_frame()
+        with contextlib.suppress(queue.Full):
+            output_q.put_nowait(image)
