@@ -86,7 +86,6 @@ class UVCBackend(CameraBackend):
             raise OSError("Camera not initialized!")
 
         frame = self._uvc_capture.get_frame(timeout=2.0)
-        frame.timestamp = self.last_frame_timestamp = uvc.get_time_monotonic()
         assert frame is not None
         return Frame(frame.img, frame.timestamp, frame.index)
 
@@ -146,7 +145,7 @@ class V4l2Backend(CameraBackend):
             raise CameraNotFoundError(self.spec.name)
 
     def get_frame(self) -> Frame:
-        buffer = self.stream.get_frame()
+        buffer, time_ns = self.stream.get_frame()
         if buffer is None:
             raise TimeoutError
 
@@ -160,7 +159,7 @@ class V4l2Backend(CameraBackend):
 
         self.frame_counter += 1
 
-        return Frame(pixels, time.time(), self.frame_counter)
+        return Frame(pixels, time_ns / 1e9, self.frame_counter)
 
     def close(self) -> None:
         self._fd.close()
