@@ -29,7 +29,7 @@ class V4lStream(Stream):
             assert buf.index is not None
 
             frame = self.buffers[buf.index][1][: buf.bytesused]
-            time_ns = buf.timestamp.tv_sec * 1_000_000_000 + buf.timestamp.tv_usec * 1_000
+            time_ns = buf.timestamp.tv_sec * 1e9 + buf.timestamp.tv_usec * 1000
             ioctl(self.f_cam, v4l2.VIDIOC_QBUF, buf)
         except Exception:
             self._stop()
