@@ -4,10 +4,8 @@ import cv2
 import numpy as np
 
 from pupil_labs.neon_usb.usb_utils import USB_ID_PRODUCT, USB_ID_VENDOR
-
-from ..uvc_utils import get_eye_exposure, set_eye_exposure
-from .backend import V4l2Backend
-from .camera import Camera, CameraSpec, Frame
+from pupil_labs.neon_usb.cameras.backend import UVCBackend
+from pupil_labs.neon_usb.cameras.camera import Camera, Frame, CameraSpec
 
 ExposureMode = Literal["manual", "auto"]
 
@@ -20,6 +18,23 @@ NEON_EYE_CAMERA_SPEC = CameraSpec(
     height=192,
     fps=200,
     bandwidth_factor=0,
+    extended_controls=[
+        {
+            'display_name': 'Absolute Exposure Time 0',
+            'unit': 'ffffffff-ffff-ffff-ffff-ffffffffffff',
+            'control_id': 0x01,
+            'bit_mask': 3 << 8,
+            'offset': 1,
+            'data_len': 3,
+            'buffer_len': 4,
+            'min_val': 0,
+            'max_val': 500,
+            'step': 1,
+            'def_val': 250,
+            'd_type': int,
+            'doc': 'Exposure for eye 0',
+        },
+    ]
 )
 
 
@@ -111,22 +126,38 @@ class EyeCamera(Camera):
         The camera stream will be started right away. If the object fails to grab
         frames, it will automatically try to reinitialize.
         """
-        super().__init__(spec, V4l2Backend)
+        super().__init__(spec, UVCBackend)
         self.exposure_algorithm: Exposure_Time | None = Exposure_Time(
             max_ET=28, frame_rate=200, mode="auto"
         )
 
+        print("Setting up vendor controls")
+        self.exposure_controls = [
+            self.backend._uvc_capture.add_vendor_control({
+                "display_name": f"Absolute Exposure Time {i}",
+                "unit": "{ffffffff-ffff-ffff-ffff-ffffffffffff}",
+                "unit_id": 3,
+                "control_id": 1 + i,
+                "bit_mask": 3 << 8,
+                "offset": 0,
+                "data_len": 4,
+                "buffer_len": 4,
+                "min_val": None,
+                "max_val": None,
+                "step": 1,
+                "def_val": None,
+                "d_type": int,
+                "doc": f"Exposure for eye {i}",
+            }) for i in range(2)
+        ]
+        print(self.exposure_controls)
+
+        self.uvc_controls = {
+            c.display_name: c for c in self.backend._uvc_capture.controls
+        }
+
     def get_frame(self) -> Frame:
         frame = super().get_frame()
-
-        if self.exposure_algorithm is not None:
-            exposure_times = self.exposure_algorithm.calculate_based_on_frame(
-                frame.timestamp, frame.gray
-            )
-
-            if exposure_times is not None:
-                for side_idx, exposure_time in enumerate(exposure_times):
-                    self._set_eye_exposure(side_idx, int(exposure_time))
 
         return frame
 
@@ -145,10 +176,7 @@ class EyeCamera(Camera):
             self._set_eye_exposure(eye_idx, value)
 
     def _get_eye_exposure(self, eye_idx: int) -> int | None:
-        assert isinstance(self.backend, V4l2Backend)
-        return get_eye_exposure(self.backend._fd, eye_idx)
+        return self.exposure_controls[eye_idx].value
 
     def _set_eye_exposure(self, eye_idx: int, exposure_time: int) -> None:
-        assert isinstance(self.backend, V4l2Backend)
-        self.exposure_algorithm = None
-        set_eye_exposure(self.backend._fd, eye_idx, exposure_time)
+        self.exposure_controls[eye_idx].value = exposure_time
