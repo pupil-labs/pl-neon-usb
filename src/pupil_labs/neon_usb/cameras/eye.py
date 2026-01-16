@@ -18,23 +18,6 @@ NEON_EYE_CAMERA_SPEC = CameraSpec(
     height=192,
     fps=200,
     bandwidth_factor=0,
-    extended_controls=[
-        {
-            'display_name': 'Absolute Exposure Time 0',
-            'unit': 'ffffffff-ffff-ffff-ffff-ffffffffffff',
-            'control_id': 0x01,
-            'bit_mask': 3 << 8,
-            'offset': 1,
-            'data_len': 3,
-            'buffer_len': 4,
-            'min_val': 0,
-            'max_val': 500,
-            'step': 1,
-            'def_val': 250,
-            'd_type': int,
-            'doc': 'Exposure for eye 0',
-        },
-    ]
 )
 
 
