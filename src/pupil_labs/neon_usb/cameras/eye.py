@@ -3,9 +3,9 @@ from typing import Literal
 import cv2
 import numpy as np
 
-from pupil_labs.neon_usb.usb_utils import USB_ID_PRODUCT, USB_ID_VENDOR
 from pupil_labs.neon_usb.cameras.backend import UVCBackend
-from pupil_labs.neon_usb.cameras.camera import Camera, Frame, CameraSpec
+from pupil_labs.neon_usb.cameras.camera import Camera, CameraSpec, Frame
+from pupil_labs.neon_usb.usb_utils import USB_ID_PRODUCT, USB_ID_VENDOR
 
 ExposureMode = Literal["manual", "auto"]
 
@@ -131,7 +131,8 @@ class EyeCamera(Camera):
                 "def_val": None,
                 "d_type": int,
                 "doc": f"Exposure for eye {i}",
-            }) for i in range(2)
+            })
+            for i in range(2)
         ]
         print(self.exposure_controls)
 
@@ -141,6 +142,15 @@ class EyeCamera(Camera):
 
     def get_frame(self) -> Frame:
         frame = super().get_frame()
+
+        if self.exposure_algorithm is not None:
+            exposure_times = self.exposure_algorithm.calculate_based_on_frame(
+                frame.timestamp, frame.gray
+            )
+
+            if exposure_times is not None:
+                for side_idx, exposure_time in enumerate(exposure_times):
+                    self._set_eye_exposure(side_idx, int(exposure_time))
 
         return frame
 
