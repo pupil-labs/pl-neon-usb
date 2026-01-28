@@ -2,9 +2,9 @@ import time
 
 import cv2
 
-from pupil_labs.neon_usb.cameras.eye import EyeCamera
+from pupil_labs.neon_usb.cameras.eye import EyeCameraUVC
 
-camera = EyeCamera()
+camera = EyeCameraUVC()
 
 counter = 0
 while True:

@@ -1,12 +1,13 @@
 import cv2
 
-from pupil_labs.neon_usb import EyeCamera, SceneCamera
+from pupil_labs.neon_usb import EyeCameraUVC, SceneCamera
 
 scene_cam = SceneCamera()
-eye_cam = EyeCamera()
+eye_cam = EyeCameraUVC()
 
 
 while True:
+    print("frame")
     scene_frame = scene_cam.get_frame()
     eye_frame = eye_cam.get_frame()
 

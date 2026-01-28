@@ -5,7 +5,7 @@ from threading import Event, Thread
 from tqdm import tqdm
 
 from pupil_labs.neon_usb import (
-    EyeCamera,
+    EyeCameraUVC,
     Frame,
     SceneCamera,
     get_all_items,
@@ -20,7 +20,7 @@ scene_stop_event = Event()
 eye_q = queue.Queue[Frame](maxsize=400)
 eye_thread = Thread(
     target=image_receiver,
-    args=(EyeCamera, eye_q, eye_start_event, eye_stop_event, scene_start_event),
+    args=(EyeCameraUVC, eye_q, eye_start_event, eye_stop_event, scene_start_event),
 )
 eye_thread.start()
 

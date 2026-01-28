@@ -8,7 +8,7 @@ from __future__ import annotations
 import importlib.metadata
 
 from pupil_labs.neon_usb.cameras.camera import CameraNotFoundError
-from pupil_labs.neon_usb.cameras.eye import EyeCamera
+from pupil_labs.neon_usb.cameras.eye import EyeCameraUVC, EyeCameraV4l2
 from pupil_labs.neon_usb.cameras.scene import SceneCamera
 from pupil_labs.neon_usb.device import Device
 from pupil_labs.neon_usb.frame import Frame
@@ -22,7 +22,8 @@ except importlib.metadata.PackageNotFoundError:
 __all__: list[str] = [
     "CameraNotFoundError",
     "Device",
-    "EyeCamera",
+    "EyeCameraUVC",
+    "EyeCameraV4l2",
     "Frame",
     "SceneCamera",
     "__version__",

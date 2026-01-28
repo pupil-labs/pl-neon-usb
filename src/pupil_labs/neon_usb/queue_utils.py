@@ -3,7 +3,9 @@ import queue
 from threading import Event
 from typing import TypeVar
 
-from pupil_labs.neon_usb import EyeCamera, Frame, SceneCamera
+from pupil_labs.neon_usb.cameras.eye import EyeCamera
+from pupil_labs.neon_usb.cameras.scene import SceneCamera
+from pupil_labs.neon_usb.frame import Frame
 
 T = TypeVar("T")
 
