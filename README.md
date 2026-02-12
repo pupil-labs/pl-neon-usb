@@ -8,6 +8,8 @@
 [![pypi version](https://img.shields.io/pypi/v/pupil-labs-neon-usb.svg)](https://pypi.org/project/pupil-labs-neon-usb/)
 [![python version](https://img.shields.io/pypi/pyversions/pupil-labs-neon-usb)](https://pypi.org/project/pupil-labs-neon-usb/)
 
+[![pl-neon-usb banner](https://raw.githubusercontent.com/pupil-labs/pl-neon-usb/refs/heads/main/docs/assets/banner.png)](https://pupil-labs.com/)
+
 Library for connecting to Neon via USB
 
 ## Installation
