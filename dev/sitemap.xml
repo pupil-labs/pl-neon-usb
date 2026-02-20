@@ -16,4 +16,40 @@
          <loc>https://pupil-labs.github.io/pl-neon-usb/dev/coverage/</loc>
          <lastmod>2026-02-20</lastmod>
     </url>
+    <url>
+         <loc>https://pupil-labs.github.io/pl-neon-usb/dev/generated_examples/collection_speed_both_cameras/</loc>
+         <lastmod>2026-02-20</lastmod>
+    </url>
+    <url>
+         <loc>https://pupil-labs.github.io/pl-neon-usb/dev/generated_examples/collection_speed_eye_camera/</loc>
+         <lastmod>2026-02-20</lastmod>
+    </url>
+    <url>
+         <loc>https://pupil-labs.github.io/pl-neon-usb/dev/generated_examples/collection_speed_imu/</loc>
+         <lastmod>2026-02-20</lastmod>
+    </url>
+    <url>
+         <loc>https://pupil-labs.github.io/pl-neon-usb/dev/generated_examples/imu/</loc>
+         <lastmod>2026-02-20</lastmod>
+    </url>
+    <url>
+         <loc>https://pupil-labs.github.io/pl-neon-usb/dev/generated_examples/manual_exposure_eye_uvc/</loc>
+         <lastmod>2026-02-20</lastmod>
+    </url>
+    <url>
+         <loc>https://pupil-labs.github.io/pl-neon-usb/dev/generated_examples/manual_exposure_eye_v4l2/</loc>
+         <lastmod>2026-02-20</lastmod>
+    </url>
+    <url>
+         <loc>https://pupil-labs.github.io/pl-neon-usb/dev/generated_examples/manual_exposure_scene/</loc>
+         <lastmod>2026-02-20</lastmod>
+    </url>
+    <url>
+         <loc>https://pupil-labs.github.io/pl-neon-usb/dev/generated_examples/real-time_visualization/</loc>
+         <lastmod>2026-02-20</lastmod>
+    </url>
+    <url>
+         <loc>https://pupil-labs.github.io/pl-neon-usb/dev/generated_examples/reconnecting/</loc>
+         <lastmod>2026-02-20</lastmod>
+    </url>
 </urlset>
