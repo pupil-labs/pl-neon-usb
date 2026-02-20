@@ -12,10 +12,14 @@ validation:
   absolute_links: warn
   unrecognized_links: warn
 
+hooks:
+  - hooks.py
+
 nav:
   - Home:
       - Overview: index.md
       - License: license.md
+  - Examples: [] # automatically filled by hook
   - API reference: modules.md
 
 theme:

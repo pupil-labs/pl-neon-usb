@@ -1,7 +1,7 @@
-from pupil_labs.neon_usb import CameraNotFoundError, EyeCamera, SceneCamera
+from pupil_labs.neon_usb import CameraNotFoundError, EyeCameraUVC, SceneCamera
 
 scene_cam = SceneCamera()
-eye_cam = EyeCamera()
+eye_cam = EyeCameraUVC()
 
 # Disconnect Neon while running this code to see the reconnection in action
 while True:
@@ -19,7 +19,7 @@ while True:
                 # del eye_cam # When adding this line, the execution will freeze here
                 scene_cam = SceneCamera()
                 print("This gets printed.")
-                eye_cam = EyeCamera()
+                eye_cam = EyeCameraUVC()
                 print("This never gets printed.")
             except CameraNotFoundError:
                 attempts += 1
