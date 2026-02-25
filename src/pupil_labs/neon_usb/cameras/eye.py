@@ -125,6 +125,10 @@ class EyeCamera(Camera):
     def get_frame(self) -> Frame:
         frame = super().get_frame()
 
+        # Neon eye camera timestamps are scaled by a factor of 1/8
+        if isinstance(self.backend, UVCBackend):
+            frame.timestamp *= 8
+
         if self.exposure_algorithm is not None:
             exposure_times = self.exposure_algorithm.calculate_based_on_frame(
                 frame.timestamp, frame.gray
