@@ -69,7 +69,6 @@ class UVCBackend(CameraBackend):
             ):
                 mode_matched = True
                 capture.frame_mode = mode
-                self.last_frame_timestamp: float = uvc.get_time_monotonic()
                 self._uvc_capture = capture
 
                 break

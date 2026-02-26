@@ -21,7 +21,7 @@ dependencies = [
     "opencv-python>=4.11.0.86",
     "pupil-labs-neon-recording",
     "pupil-labs-neon-usb-imu>=1.0.0",
-    "pupil-labs-uvc>=1.0.0",
+    "pupil-labs-uvc",
     "pyusb>=1.3.1",
 ]
 
@@ -88,3 +88,6 @@ source = "uv-dynamic-versioning"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/pupil_labs"]
+
+[tool.uv.sources]
+pupil-labs-uvc = { git = "https://github.com/pupil-labs/pyuvc", rev = "neon-eyes-fix" }
