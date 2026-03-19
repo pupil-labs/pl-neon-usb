@@ -88,6 +88,3 @@ source = "uv-dynamic-versioning"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/pupil_labs"]
-
-[tool.uv.sources]
-pupil-labs-uvc = { git = "https://github.com/pupil-labs/pyuvc", rev = "neon-eyes-fix" }

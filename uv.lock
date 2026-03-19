@@ -1165,7 +1165,7 @@ requires-dist = [
     { name = "opencv-python", specifier = ">=4.11.0.86" },
     { name = "pupil-labs-neon-recording" },
     { name = "pupil-labs-neon-usb-imu", specifier = ">=1.0.0" },
-    { name = "pupil-labs-uvc", git = "https://github.com/pupil-labs/pyuvc?rev=neon-eyes-fix" },
+    { name = "pupil-labs-uvc" },
     { name = "pyusb", specifier = ">=1.3.1" },
     { name = "tqdm", marker = "extra == 'examples'", specifier = ">=4.67.1" },
 ]
@@ -1207,10 +1207,20 @@ wheels = [
 
 [[package]]
 name = "pupil-labs-uvc"
-version = "1.0.1.dev5+g587b8f93f"
-source = { git = "https://github.com/pupil-labs/pyuvc?rev=neon-eyes-fix#587b8f93f9327ae497b56b7efc80fef120e89437" }
+version = "1.0.2"
+source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "numpy" },
+]
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/6f/32/7447469bbbea313956716a04133e952bcc2a6457842e600d5450ea18359b/pupil_labs_uvc-1.0.2-cp310-cp310-macosx_15_0_arm64.whl", hash = "sha256:40254665b3de47b2aadc717003b3b588dac511ad35813e942bc5df7f5f459aaa", size = 514551, upload-time = "2026-03-05T15:13:54.511Z" },
+    { url = "https://files.pythonhosted.org/packages/6c/de/dd942315d8be1cfb3e28ef07258641111bd287b7b68ac4cc91fd7ee9a7ef/pupil_labs_uvc-1.0.2-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.whl", hash = "sha256:8ecd99b653f65333eea9ef403c8b7a0ff2a4fca786b964f2606a10e57b07bfde", size = 1124128, upload-time = "2026-03-05T15:13:56.326Z" },
+    { url = "https://files.pythonhosted.org/packages/50/99/2b07fad1617cc47b9395db66a468cf2e6e1f68900efe50b327a027ad4d8e/pupil_labs_uvc-1.0.2-cp310-cp310-musllinux_1_2_x86_64.whl", hash = "sha256:ba834547a31d7ddf6f41b62b632ecb45c12f99d3c53dd91c9356ef713972d28c", size = 769447, upload-time = "2026-03-05T15:13:57.751Z" },
+    { url = "https://files.pythonhosted.org/packages/5b/f1/0de9c84b6006a2c8dd6bdd41d6d78fa755852fa89e1560b1796e3b94761a/pupil_labs_uvc-1.0.2-cp310-cp310-win_amd64.whl", hash = "sha256:b5043626454d890f4ca3d800ac39874242a4cdf5ee200e621542205b9b319e56", size = 976870, upload-time = "2026-03-05T15:13:59.203Z" },
+    { url = "https://files.pythonhosted.org/packages/67/ac/e7ffc2b83159db56a059a6f2842cdb1462719c119bb1d338e4468dda133d/pupil_labs_uvc-1.0.2-cp311-cp311-macosx_15_0_arm64.whl", hash = "sha256:1a21e4c8e5829f31bd48e9bd3dcd5b4831a3851f66695356db7a7314accd2f2c", size = 513660, upload-time = "2026-03-05T15:14:00.785Z" },
+    { url = "https://files.pythonhosted.org/packages/9b/4a/5c3cb6c06a75c159aaf662b9962e03bf223194c837b2349f9a5b70f980a4/pupil_labs_uvc-1.0.2-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.whl", hash = "sha256:72711d4881159506d142b6b29df0cb93dc0596b1d440433b6a15ca5b100f555c", size = 1122582, upload-time = "2026-03-05T15:14:02.545Z" },
+    { url = "https://files.pythonhosted.org/packages/62/51/45f401c10545dd2850fe0b8dd21df9a1df788ec8ef0d57dbbf88c4fbc009/pupil_labs_uvc-1.0.2-cp311-cp311-musllinux_1_2_x86_64.whl", hash = "sha256:17645cbd518b3ca70da41f11c753bd40bd7d51b610604758286d1d38f386500e", size = 768337, upload-time = "2026-03-05T15:14:04.154Z" },
+    { url = "https://files.pythonhosted.org/packages/62/f5/cc74fbcc1496d32080d3f5cb02268d1b3e0eb4b175fd7dcf1e53311369bd/pupil_labs_uvc-1.0.2-cp311-cp311-win_amd64.whl", hash = "sha256:41e61c53b971fbd3ada92c0b783c2a42cc15732efec713b9ec6a20f978a3396b", size = 976389, upload-time = "2026-03-05T15:14:05.965Z" },
 ]
 
 [[package]]
