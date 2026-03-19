@@ -3,6 +3,7 @@ import usb.util
 
 from pupil_labs.neon_recording.calib import Calibration
 
+VC_GET_VERSION = 0xC0
 VC_READ_CALIRATION_DATA = 0xD4
 CALIBRATION_DATA_LENGTH = 1024
 CALIBRATION_DATA_CHUNK_SIZE = 64
@@ -33,7 +34,7 @@ def _read_calibration_data_chunk(dev: usb.core.Device, offset: int) -> bytes:
     return bytes(data)
 
 
-def _read_calibration_data(dev: usb.core.Device | None = None) -> bytes:
+def _read_calibration_data(dev: usb.core.Device) -> bytes:
     """Read full calibration data block from device
 
     Arguments:
@@ -43,9 +44,6 @@ def _read_calibration_data(dev: usb.core.Device | None = None) -> bytes:
         byte array containing the calibration data
 
     """
-    if dev is None:
-        dev = _find_neon()
-
     data = b"".join([
         _read_calibration_data_chunk(dev, offset)
         for offset in range(0, CALIBRATION_DATA_LENGTH, CALIBRATION_DATA_CHUNK_SIZE)
@@ -58,6 +56,26 @@ def _find_neon() -> usb.core.Device:
     return usb.core.find(idVendor=USB_ID_VENDOR, idProduct=USB_ID_PRODUCT)
 
 
-def get_calibration() -> Calibration:
-    data = _read_calibration_data()
+def get_calibration(dev: usb.core.Device | None = None) -> Calibration:
+    if dev is None:
+        dev = _find_neon()
+
+    data = _read_calibration_data(dev)
     return Calibration.from_buffer(data[: Calibration.dtype.itemsize])
+
+
+def get_versions(dev: usb.core.Device | None = None) -> dict[str, int]:
+    if dev is None:
+        dev = _find_neon()
+
+    data = dev.ctrl_transfer(usb.util.CTRL_IN | usb.util.CTRL_TYPE_VENDOR,
+                             VC_GET_VERSION, 0, 0, 8)
+    if len(data) != 8:
+        raise IOError("Reading 8 bytes to VC_GET_VERSION failed")
+
+    versions = {
+        'fx2': int.from_bytes(data[:4], byteorder='little'),
+        'fpga': int.from_bytes(data[4:], byteorder='little'),
+    }
+
+    return versions
