@@ -10,13 +10,13 @@
       
       
       
-        <link rel="canonical" href="https://pupil-labs.github.io/pl-neon-usb/dev/generated_examples/manual_exposure_eye_uvc/">
+        <link rel="canonical" href="https://pupil-labs.github.io/pl-neon-usb/dev/generated_examples/version_numbers/">
       
       
-        <link rel="prev" href="../imu/">
+        <link rel="prev" href="../reconnecting/">
       
       
-        <link rel="next" href="../manual_exposure_eye_v4l2/">
+        <link rel="next" href="../../modules/">
       
       
         
@@ -27,7 +27,7 @@
     
     
       
-        <title>Manual Exposure Eye Uvc - Pupil Labs Neon USB</title>
+        <title>Version Numbers - Pupil Labs Neon USB</title>
       
     
     
@@ -86,7 +86,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#manual-exposure-eye-uvc" class="md-skip">
+        <a href="#version-numbers" class="md-skip">
           Skip to content
         </a>
       
@@ -137,7 +137,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Manual Exposure Eye Uvc
+              Version Numbers
             
           </span>
         </div>
@@ -674,19 +674,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../manual_exposure_eye_uvc/" class="md-nav__link">
         
   
   
@@ -702,7 +693,6 @@
   
 
       </a>
-      
     </li>
   
 
@@ -824,10 +814,19 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../version_numbers/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -843,6 +842,7 @@
   
 
       </a>
+      
     </li>
   
 
@@ -917,7 +917,7 @@
 
 
   
-    <a href="https://github.com/pupil-labs/pl-neon-usb/edit/main/docs/generated_examples/manual_exposure_eye_uvc.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+    <a href="https://github.com/pupil-labs/pl-neon-usb/edit/main/docs/generated_examples/version_numbers.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
     </a>
@@ -925,25 +925,11 @@
   
 
 
-<h1 id="manual-exposure-eye-uvc">Manual Exposure Eye Uvc<a class="headerlink" href="#manual-exposure-eye-uvc" title="Permanent link">&para;</a></h1>
-<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<h1 id="version-numbers">Version Numbers<a class="headerlink" href="#version-numbers" title="Permanent link">&para;</a></h1>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">pupil_labs.neon_usb.usb_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_calibration</span><span class="p">,</span> <span class="n">get_versions</span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">cv2</span>
-
-<span class="kn">from</span><span class="w"> </span><span class="nn">pupil_labs.neon_usb.cameras.eye</span><span class="w"> </span><span class="kn">import</span> <span class="n">EyeCameraUVC</span>
-
-<span class="n">camera</span> <span class="o">=</span> <span class="n">EyeCameraUVC</span><span class="p">()</span>
-
-<span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
-    <span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
-    <span class="n">frame</span> <span class="o">=</span> <span class="n">camera</span><span class="o">.</span><span class="n">get_frame</span><span class="p">()</span>
-    <span class="n">image</span> <span class="o">=</span> <span class="n">frame</span><span class="o">.</span><span class="n">bgr</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;exposure:&quot;</span><span class="p">,</span> <span class="n">camera</span><span class="o">.</span><span class="n">exposure</span><span class="p">)</span>
-    <span class="n">camera</span><span class="o">.</span><span class="n">exposure</span> <span class="o">=</span> <span class="p">(</span><span class="n">counter</span> <span class="o">%</span> <span class="mi">50</span><span class="p">,</span> <span class="p">(</span><span class="n">counter</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span> <span class="o">%</span> <span class="mi">50</span><span class="p">)</span>
-    <span class="n">cv2</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="s2">&quot;Neon Sensor Module&quot;</span><span class="p">,</span> <span class="n">image</span><span class="p">)</span>
-    <span class="n">cv2</span><span class="o">.</span><span class="n">waitKey</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.05</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Calibration&quot;</span><span class="p">,</span> <span class="n">get_calibration</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Version numbers&quot;</span><span class="p">,</span> <span class="n">get_versions</span><span class="p">())</span>
 </code></pre></div>
 
 
@@ -980,7 +966,7 @@
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../imu/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Imu">
+          <a href="../reconnecting/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Reconnecting">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -990,20 +976,20 @@
                 Previous
               </span>
               <div class="md-ellipsis">
-                Imu
+                Reconnecting
               </div>
             </div>
           </a>
         
         
           
-          <a href="../manual_exposure_eye_v4l2/" class="md-footer__link md-footer__link--next" aria-label="Next: Manual Exposure Eye V4L2">
+          <a href="../../modules/" class="md-footer__link md-footer__link--next" aria-label="Next: API reference">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Manual Exposure Eye V4L2
+                API reference
               </div>
             </div>
             <div class="md-footer__button md-icon">
