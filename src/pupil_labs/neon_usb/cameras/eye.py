@@ -19,6 +19,7 @@ NEON_EYE_CAMERA_SPEC = CameraSpec(
     height=192,
     fps=200,
     bandwidth_factor=0,
+    clock_freq_override=48018650,
 )
 
 

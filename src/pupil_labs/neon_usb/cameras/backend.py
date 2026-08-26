@@ -60,6 +60,9 @@ class UVCBackend(CameraBackend):
         capture = uvc.Capture(uid, self.extended_controls)
         capture.bandwidth_factor = self.spec.bandwidth_factor
 
+        if self.spec.clock_freq_override:
+            capture.clock_freq_override = self.spec.clock_freq_override
+
         mode_matched = False
         for mode in capture.available_modes:
             if (mode.width, mode.height, mode.fps) == (
