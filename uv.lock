@@ -1,6 +1,6 @@
 version = 1
 revision = 3
-requires-python = ">=3.10, <=3.13"
+requires-python = ">=3.10, <3.14"
 resolution-markers = [
     "python_full_version >= '3.12' and sys_platform == 'darwin'",
     "python_full_version >= '3.12' and platform_machine == 'aarch64' and sys_platform == 'linux'",
@@ -1512,7 +1512,7 @@ requires-dist = [
     { name = "opencv-python", specifier = ">=4.11.0.86" },
     { name = "pupil-labs-neon-recording" },
     { name = "pupil-labs-neon-usb-imu", specifier = ">=1.0.0" },
-    { name = "pupil-labs-uvc" },
+    { name = "pupil-labs-uvc", specifier = ">=1.0.4" },
     { name = "pyusb", specifier = ">=1.3.1" },
     { name = "tqdm", marker = "extra == 'examples'", specifier = ">=4.67.1" },
 ]

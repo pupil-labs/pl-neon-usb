@@ -4,7 +4,7 @@ description = "Library for connecting to Neon via USB"
 authors = [{ name = "Pupil Labs GmbH", email = "info@pupil-labs.com" }]
 license = { text = "MIT" }
 readme = "README.md"
-requires-python = ">=3.10, <=3.13"
+requires-python = ">=3.10, <3.14"
 keywords = []
 dynamic = ["version"]
 classifiers = [
@@ -18,7 +18,7 @@ dependencies = [
     "opencv-python>=4.11.0.86",
     "pupil-labs-neon-recording",
     "pupil-labs-neon-usb-imu>=1.0.0",
-    "pupil-labs-uvc",
+    "pupil-labs-uvc>=1.0.4",
     "pyusb>=1.3.1",
 ]
 
