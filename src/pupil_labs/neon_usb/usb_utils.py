@@ -68,14 +68,15 @@ def get_versions(dev: usb.core.Device | None = None) -> dict[str, int]:
     if dev is None:
         dev = _find_neon()
 
-    data = dev.ctrl_transfer(usb.util.CTRL_IN | usb.util.CTRL_TYPE_VENDOR,
-                             VC_GET_VERSION, 0, 0, 8)
+    data = dev.ctrl_transfer(
+        usb.util.CTRL_IN | usb.util.CTRL_TYPE_VENDOR, VC_GET_VERSION, 0, 0, 8
+    )
     if len(data) != 8:
-        raise IOError("Reading 8 bytes to VC_GET_VERSION failed")
+        raise OSError("Reading 8 bytes to VC_GET_VERSION failed")
 
     versions = {
-        'fx2': int.from_bytes(data[:4], byteorder='little'),
-        'fpga': int.from_bytes(data[4:], byteorder='little'),
+        "fx2": int.from_bytes(data[:4], byteorder="little"),
+        "fpga": int.from_bytes(data[4:], byteorder="little"),
     }
 
     return versions
