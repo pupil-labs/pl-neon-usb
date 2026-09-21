@@ -7,7 +7,7 @@ import numpy as np
 @dataclass
 class Frame:
     img: np.ndarray
-    timestamp: float
+    time: int
     index: int
 
     @property

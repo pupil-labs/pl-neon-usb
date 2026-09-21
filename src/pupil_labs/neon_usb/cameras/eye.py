@@ -127,7 +127,7 @@ class EyeCamera(Camera):
 
         if self.exposure_algorithm is not None:
             exposure_times = self.exposure_algorithm.calculate_based_on_frame(
-                frame.timestamp, frame.gray
+                frame.time, frame.gray
             )
 
             if exposure_times is not None:
