@@ -187,7 +187,8 @@ class V4l2Backend(CameraBackend):
 
         self.frame_counter += 1
 
-        return Frame(pixels, time_ns + self.utc_offset_ns, self.frame_counter)
+        utc_timestamp = int(time_ns) + self.utc_offset_ns
+        return Frame(pixels, utc_timestamp, self.frame_counter)
 
     def close(self) -> None:
         self._fd.close()
