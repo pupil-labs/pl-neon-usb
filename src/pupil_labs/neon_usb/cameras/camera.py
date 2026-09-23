@@ -15,6 +15,7 @@ class CameraSpec(NamedTuple):
     height: int
     fps: int
     bandwidth_factor: float
+    clock_freq_override: int = 0
 
 
 class CameraNotFoundError(Exception):
