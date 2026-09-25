@@ -23,7 +23,7 @@
       
       
       <link rel="icon" href="../../assets/favicon.ico">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.0">
+      <meta name="generator" content="mkdocs-ProperDocs 1.6.7, mkdocs-material-9.7.7">
     
     
       
@@ -31,7 +31,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.618322db.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
@@ -938,27 +938,27 @@
         <span class="n">eye_frame</span> <span class="o">=</span> <span class="n">eye_cam</span><span class="o">.</span><span class="n">get_frame</span><span class="p">()</span>
     <span class="k">except</span> <span class="ne">TimeoutError</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span>
-            <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">TimeoutError - The device has been disconnected.&quot;</span>
-            <span class="s2">&quot; Attempting to reconnect.</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="s2">"</span><span class="se">\n</span><span class="s2">TimeoutError - The device has been disconnected."</span>
+            <span class="s2">" Attempting to reconnect.</span><span class="se">\n</span><span class="s2">"</span>
         <span class="p">)</span>
         <span class="n">attempts</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="c1"># del eye_cam # When adding this line, the execution will freeze here</span>
                 <span class="n">scene_cam</span> <span class="o">=</span> <span class="n">SceneCamera</span><span class="p">()</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;This gets printed.&quot;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">"This gets printed."</span><span class="p">)</span>
                 <span class="n">eye_cam</span> <span class="o">=</span> <span class="n">EyeCameraUVC</span><span class="p">()</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;This never gets printed.&quot;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">"This never gets printed."</span><span class="p">)</span>
             <span class="k">except</span> <span class="n">CameraNotFoundError</span><span class="p">:</span>
                 <span class="n">attempts</span> <span class="o">+=</span> <span class="mi">1</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\033</span><span class="s2">[1A&quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\x1b</span><span class="s2">[2K&quot;</span><span class="p">)</span>  <span class="c1"># This line clears the previous line</span>
-                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Device not yet reconnected. Retrying...</span><span class="si">{</span><span class="n">attempts</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\033</span><span class="s2">[1A"</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">"</span><span class="se">\x1b</span><span class="s2">[2K"</span><span class="p">)</span>  <span class="c1"># This line clears the previous line</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Device not yet reconnected. Retrying...</span><span class="si">{</span><span class="n">attempts</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Device reconnected.</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">"Device reconnected.</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
                 <span class="k">break</span>
         <span class="k">continue</span>
 
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\r</span><span class="s2">scene index: </span><span class="si">{</span><span class="n">scene_frame</span><span class="o">.</span><span class="n">index</span><span class="si">}</span><span class="s2"> </span><span class="se">\t</span><span class="s2"> eye index: </span><span class="si">{</span><span class="n">eye_frame</span><span class="o">.</span><span class="n">index</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\r</span><span class="s2">scene index: </span><span class="si">{</span><span class="n">scene_frame</span><span class="o">.</span><span class="n">index</span><span class="si">}</span><span class="s2"> </span><span class="se">\t</span><span class="s2"> eye index: </span><span class="si">{</span><span class="n">eye_frame</span><span class="o">.</span><span class="n">index</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">""</span><span class="p">)</span>
 </code></pre></div>
 
 
@@ -1107,10 +1107,10 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["announce.dismiss", "content.action.edit", "content.code.copy", "content.code.annotate", "navigation.indexes", "navigation.sections", "navigation.tabs", "navigation.tabs.sticky", "navigation.footer", "navigation.top", "search.highlight", "search.suggest", "toc.follow"], "search": "../../assets/javascripts/workers/search.7a47a382.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["announce.dismiss", "content.action.edit", "content.code.copy", "content.code.annotate", "navigation.indexes", "navigation.sections", "navigation.tabs", "navigation.tabs.sticky", "navigation.footer", "navigation.top", "search.highlight", "search.suggest", "toc.follow"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.e71a0d61.min.js"></script>
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
       
         <script src="../../assets/_markdown_exec_pyodide.js"></script>
       
