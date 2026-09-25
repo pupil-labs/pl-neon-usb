@@ -292,7 +292,7 @@ resolution-markers = [
     "(python_full_version < '3.11' and platform_machine != 'aarch64' and sys_platform == 'linux') or (python_full_version < '3.11' and sys_platform != 'darwin' and sys_platform != 'linux')",
 ]
 dependencies = [
-    { name = "numpy", marker = "python_full_version < '3.11'" },
+    { name = "numpy" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/66/54/eb9bfc647b19f2009dd5c7f5ec51c4e6ca831725f1aea7a993034f483147/contourpy-1.3.2.tar.gz", hash = "sha256:b6945942715a034c671b7fc54f9588126b0b8bf23db2696e3ca8328f3ff0ab54", size = 13466130, upload-time = "2025-04-15T17:47:53.79Z" }
 wheels = [
@@ -371,7 +371,7 @@ resolution-markers = [
     "(python_full_version == '3.11.*' and platform_machine != 'aarch64' and sys_platform == 'linux') or (python_full_version == '3.11.*' and sys_platform != 'darwin' and sys_platform != 'emscripten' and sys_platform != 'linux' and sys_platform != 'win32')",
 ]
 dependencies = [
-    { name = "numpy", marker = "python_full_version >= '3.11'" },
+    { name = "numpy" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/58/01/1253e6698a07380cd31a736d248a3f2a50a7c88779a1813da27503cadc2a/contourpy-1.3.3.tar.gz", hash = "sha256:083e12155b210502d0bca491432bb04d56dc3432f95a979b429f2848c3dbe880", size = 13466174, upload-time = "2025-07-26T12:03:12.549Z" }
 wheels = [
@@ -558,7 +558,7 @@ name = "exceptiongroup"
 version = "1.3.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "typing-extensions", marker = "python_full_version < '3.11'" },
+    { name = "typing-extensions" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/50/79/66800aadf48771f6b62f7eb014e352e5d06856655206165d775e675a02c9/exceptiongroup-1.3.1.tar.gz", hash = "sha256:8b412432c6055b0b7d14c310000ae93352ed6754f70fa8f7c34141f91c4e3219", size = 30371, upload-time = "2025-11-21T23:01:54.787Z" }
 wheels = [
@@ -926,9 +926,35 @@ wheels = [
 name = "markdown"
 version = "3.10.3"
 source = { registry = "https://pypi.org/simple" }
+resolution-markers = [
+    "python_full_version < '3.11' and sys_platform == 'darwin'",
+    "python_full_version < '3.11' and platform_machine == 'aarch64' and sys_platform == 'linux'",
+    "(python_full_version < '3.11' and platform_machine != 'aarch64' and sys_platform == 'linux') or (python_full_version < '3.11' and sys_platform != 'darwin' and sys_platform != 'linux')",
+]
 sdist = { url = "https://files.pythonhosted.org/packages/29/6f/da4c6aea59b3001f2e8c0ec7497475aadaf3b021c10cab5b2858f0f32b26/markdown-3.10.3.tar.gz", hash = "sha256:3589362618f743188b4d955b874402bc814f4f83f544dc207719f4baa7d9c45f", size = 372596, upload-time = "2026-07-30T19:05:29.005Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/64/69/4a5af2bc115a9a33fefe51709749de8262be3f9ba063d1753a837cdbc49c/markdown-3.10.3-py3-none-any.whl", hash = "sha256:fa6c92a00a4a3c98b22728c64a935ae1928250ae65058a6ded814d2cc29a4cea", size = 110757, upload-time = "2026-07-30T19:05:27.883Z" },
+]
+
+[[package]]
+name = "markdown"
+version = "3.11"
+source = { registry = "https://pypi.org/simple" }
+resolution-markers = [
+    "python_full_version >= '3.12' and sys_platform == 'darwin'",
+    "python_full_version >= '3.12' and platform_machine == 'aarch64' and sys_platform == 'linux'",
+    "python_full_version >= '3.12' and sys_platform == 'win32'",
+    "python_full_version >= '3.12' and sys_platform == 'emscripten'",
+    "(python_full_version >= '3.12' and platform_machine != 'aarch64' and sys_platform == 'linux') or (python_full_version >= '3.12' and sys_platform != 'darwin' and sys_platform != 'emscripten' and sys_platform != 'linux' and sys_platform != 'win32')",
+    "python_full_version == '3.11.*' and sys_platform == 'darwin'",
+    "python_full_version == '3.11.*' and platform_machine == 'aarch64' and sys_platform == 'linux'",
+    "python_full_version == '3.11.*' and sys_platform == 'win32'",
+    "python_full_version == '3.11.*' and sys_platform == 'emscripten'",
+    "(python_full_version == '3.11.*' and platform_machine != 'aarch64' and sys_platform == 'linux') or (python_full_version == '3.11.*' and sys_platform != 'darwin' and sys_platform != 'emscripten' and sys_platform != 'linux' and sys_platform != 'win32')",
+]
+sdist = { url = "https://files.pythonhosted.org/packages/f8/4f/700155c8c20d9e655dd0732b5fc3c7614f291b9148da271d7388e50bf774/markdown-3.11.tar.gz", hash = "sha256:180224db6aed87ba9ce1f2781ebcd5826253de8ff637112090e24b84502bbf9f", size = 485623, upload-time = "2026-09-25T13:46:23.473Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/ec/1e/32971905a7ab47f8b66866ed949fa48b104ba1c4a6fa57794c4f2c4b2cb8/markdown-3.11-py3-none-any.whl", hash = "sha256:cd6c89e7eb308c8b332ed673215a52d208a43f8bacc030b1419376129408719e", size = 111296, upload-time = "2026-09-25T13:46:22.163Z" },
 ]
 
 [[package]]
@@ -936,7 +962,8 @@ name = "markdown-callouts"
 version = "0.4.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "markdown" },
+    { name = "markdown", version = "3.10.3", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
+    { name = "markdown", version = "3.11", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/87/73/ae5aa379f6f7fea9d0bf4cba888f9a31d451d90f80033ae60ae3045770d5/markdown_callouts-0.4.0.tar.gz", hash = "sha256:7ed2c90486967058a73a547781121983839522d67041ae52c4979616f1b2b746", size = 9768, upload-time = "2024-01-22T23:18:18.513Z" }
 wheels = [
@@ -1028,15 +1055,15 @@ resolution-markers = [
     "(python_full_version < '3.11' and platform_machine != 'aarch64' and sys_platform == 'linux') or (python_full_version < '3.11' and sys_platform != 'darwin' and sys_platform != 'linux')",
 ]
 dependencies = [
-    { name = "contourpy", version = "1.3.2", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
-    { name = "cycler", marker = "python_full_version < '3.11'" },
-    { name = "fonttools", version = "4.65.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
-    { name = "kiwisolver", marker = "python_full_version < '3.11'" },
-    { name = "numpy", marker = "python_full_version < '3.11'" },
-    { name = "packaging", marker = "python_full_version < '3.11'" },
-    { name = "pillow", marker = "python_full_version < '3.11'" },
-    { name = "pyparsing", marker = "python_full_version < '3.11'" },
-    { name = "python-dateutil", marker = "python_full_version < '3.11'" },
+    { name = "contourpy", version = "1.3.2", source = { registry = "https://pypi.org/simple" } },
+    { name = "cycler" },
+    { name = "fonttools", version = "4.65.0", source = { registry = "https://pypi.org/simple" } },
+    { name = "kiwisolver" },
+    { name = "numpy" },
+    { name = "packaging" },
+    { name = "pillow" },
+    { name = "pyparsing" },
+    { name = "python-dateutil" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/63/1b/4be5be87d43d327a0cf4de1a56e86f7f84c89312452406cf122efe2839e6/matplotlib-3.10.9.tar.gz", hash = "sha256:fd66508e8c6877d98e586654b608a0456db8d7e8a546eb1e2600efd957302358", size = 34811233, upload-time = "2026-04-24T00:14:13.539Z" }
 wheels = [
@@ -1099,15 +1126,15 @@ resolution-markers = [
     "(python_full_version == '3.11.*' and platform_machine != 'aarch64' and sys_platform == 'linux') or (python_full_version == '3.11.*' and sys_platform != 'darwin' and sys_platform != 'emscripten' and sys_platform != 'linux' and sys_platform != 'win32')",
 ]
 dependencies = [
-    { name = "contourpy", version = "1.3.3", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11'" },
-    { name = "cycler", marker = "python_full_version >= '3.11'" },
-    { name = "fonttools", version = "4.66.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11'" },
-    { name = "kiwisolver", marker = "python_full_version >= '3.11'" },
-    { name = "numpy", marker = "python_full_version >= '3.11'" },
-    { name = "packaging", marker = "python_full_version >= '3.11'" },
-    { name = "pillow", marker = "python_full_version >= '3.11'" },
-    { name = "pyparsing", marker = "python_full_version >= '3.11'" },
-    { name = "python-dateutil", marker = "python_full_version >= '3.11'" },
+    { name = "contourpy", version = "1.3.3", source = { registry = "https://pypi.org/simple" } },
+    { name = "cycler" },
+    { name = "fonttools", version = "4.66.0", source = { registry = "https://pypi.org/simple" } },
+    { name = "kiwisolver" },
+    { name = "numpy" },
+    { name = "packaging" },
+    { name = "pillow" },
+    { name = "pyparsing" },
+    { name = "python-dateutil" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/e7/c8/9aa712a0afb882649424dd8de8ad9aa6235e796e84c6052e8f6dc1598d0d/matplotlib-3.11.2.tar.gz", hash = "sha256:cec596316640f2b394b8f0daa0ea61a8eae82d017b620b9f202befb972a59ea4", size = 32660610, upload-time = "2026-09-11T19:05:31.214Z" }
 wheels = [
@@ -1172,7 +1199,8 @@ dependencies = [
     { name = "colorama", marker = "sys_platform == 'win32'" },
     { name = "ghp-import" },
     { name = "jinja2" },
-    { name = "markdown" },
+    { name = "markdown", version = "3.10.3", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
+    { name = "markdown", version = "3.11", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11'" },
     { name = "markupsafe" },
     { name = "mergedeep" },
     { name = "mkdocs-get-deps" },
@@ -1192,7 +1220,8 @@ name = "mkdocs-autorefs"
 version = "1.4.4"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "markdown" },
+    { name = "markdown", version = "3.10.3", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
+    { name = "markdown", version = "3.11", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11'" },
     { name = "markupsafe" },
     { name = "mkdocs" },
 ]
@@ -1278,7 +1307,8 @@ dependencies = [
     { name = "backrefs" },
     { name = "colorama" },
     { name = "jinja2" },
-    { name = "markdown" },
+    { name = "markdown", version = "3.10.3", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
+    { name = "markdown", version = "3.11", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11'" },
     { name = "mkdocs" },
     { name = "mkdocs-material-extensions" },
     { name = "paginate" },
@@ -1321,7 +1351,8 @@ version = "1.0.6"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "jinja2" },
-    { name = "markdown" },
+    { name = "markdown", version = "3.10.3", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
+    { name = "markdown", version = "3.11", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11'" },
     { name = "markupsafe" },
     { name = "mkdocs" },
     { name = "mkdocs-autorefs" },
@@ -1497,10 +1528,10 @@ resolution-markers = [
     "(python_full_version < '3.11' and platform_machine != 'aarch64' and sys_platform == 'linux') or (python_full_version < '3.11' and sys_platform != 'darwin' and sys_platform != 'linux')",
 ]
 dependencies = [
-    { name = "numpy", marker = "python_full_version < '3.11'" },
-    { name = "python-dateutil", marker = "python_full_version < '3.11'" },
-    { name = "pytz", marker = "python_full_version < '3.11'" },
-    { name = "tzdata", marker = "python_full_version < '3.11'" },
+    { name = "numpy" },
+    { name = "python-dateutil" },
+    { name = "pytz" },
+    { name = "tzdata" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/33/01/d40b85317f86cf08d853a4f495195c73815fdf205eef3993821720274518/pandas-2.3.3.tar.gz", hash = "sha256:e05e1af93b977f7eafa636d043f9f94c7ee3ac81af99c13508215942e64c993b", size = 4495223, upload-time = "2025-09-29T23:34:51.853Z" }
 wheels = [
@@ -1557,9 +1588,9 @@ resolution-markers = [
     "(python_full_version == '3.11.*' and platform_machine != 'aarch64' and sys_platform == 'linux') or (python_full_version == '3.11.*' and sys_platform != 'darwin' and sys_platform != 'emscripten' and sys_platform != 'linux' and sys_platform != 'win32')",
 ]
 dependencies = [
-    { name = "numpy", marker = "python_full_version >= '3.11'" },
-    { name = "python-dateutil", marker = "python_full_version >= '3.11'" },
-    { name = "tzdata", marker = "(python_full_version >= '3.11' and sys_platform == 'emscripten') or (python_full_version >= '3.11' and sys_platform == 'win32')" },
+    { name = "numpy" },
+    { name = "python-dateutil" },
+    { name = "tzdata", marker = "sys_platform == 'emscripten' or sys_platform == 'win32'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/e2/17/d7b106e05bfa642e8694451e7d3d759c6a241c5386a5d962e4f66c047e06/pandas-3.0.6.tar.gz", hash = "sha256:66b07ef7315a31bfe1089cd3d71a7de781c9dca986762d0b4fe7c0ef17465d10", size = 4667686, upload-time = "2026-09-17T23:23:18.345Z" }
 wheels = [
@@ -1703,7 +1734,8 @@ dependencies = [
     { name = "colorama", marker = "sys_platform == 'win32'" },
     { name = "ghp-import" },
     { name = "jinja2" },
-    { name = "markdown" },
+    { name = "markdown", version = "3.10.3", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
+    { name = "markdown", version = "3.11", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11'" },
     { name = "markupsafe" },
     { name = "packaging" },
     { name = "pathspec" },
@@ -1799,7 +1831,7 @@ requires-dist = [
     { name = "opencv-python", specifier = ">=4.11.0.86" },
     { name = "pupil-labs-neon-recording" },
     { name = "pupil-labs-neon-usb-imu", specifier = ">=1.1.0" },
-    { name = "pupil-labs-uvc", specifier = ">=1.0.4" },
+    { name = "pupil-labs-uvc", specifier = ">=1.0.6" },
     { name = "pyusb", specifier = ">=1.3.1" },
     { name = "tqdm", marker = "extra == 'examples'", specifier = ">=4.67.1" },
 ]
@@ -1857,36 +1889,36 @@ wheels = [
 
 [[package]]
 name = "pupil-labs-uvc"
-version = "1.0.4"
+version = "1.0.6"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "numpy" },
 ]
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/cf/c5/b9270a9d67d8bfc18ed9ee7d3442a989cb7c761e6a730c70231306a24f94/pupil_labs_uvc-1.0.4-cp310-cp310-macosx_15_0_arm64.whl", hash = "sha256:3a48ffbe167c455417e550a748162c29c0c777fdd1a2594c0346be89270d68b2", size = 515199, upload-time = "2026-05-22T14:40:02.454Z" },
-    { url = "https://files.pythonhosted.org/packages/07/16/a9e0d7ca11c2a74c377c77625e463119410f5936874cbe679137d934d126/pupil_labs_uvc-1.0.4-cp310-cp310-manylinux2014_aarch64.manylinux_2_17_aarch64.whl", hash = "sha256:0957107173ef9e234a44dbfe25e00c3f06635d02a610516e0db0fe7a9aa97162", size = 1093397, upload-time = "2026-05-22T14:40:04.58Z" },
-    { url = "https://files.pythonhosted.org/packages/b5/b5/ba0a5f556a38106edaefc0eb018d0f6ae1591d1a6a3f1d7474d41c890a8c/pupil_labs_uvc-1.0.4-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.whl", hash = "sha256:f6693d54660dadc426b3e3f5025f787982bbde8567755cc8974cb6153b648e66", size = 1124540, upload-time = "2026-05-22T14:40:06.884Z" },
-    { url = "https://files.pythonhosted.org/packages/22/2c/42a4d77e217cf10481f523b6c1a3a760020afbf54658e7e576d26095f709/pupil_labs_uvc-1.0.4-cp310-cp310-musllinux_1_2_aarch64.whl", hash = "sha256:b5327bc75cb899bc35533c8997cf989227d7c7aa2a2a10cb8c1319d3586b8058", size = 769985, upload-time = "2026-05-22T14:40:08.801Z" },
-    { url = "https://files.pythonhosted.org/packages/d1/dd/b1974a1dd1e952bccb0eab0214bf6230a4abcbd7b2d544291296ee851c46/pupil_labs_uvc-1.0.4-cp310-cp310-musllinux_1_2_x86_64.whl", hash = "sha256:5cf03b293a08088d0d40d731061e1c963eb2f861f105c359258d31a029b4ab4c", size = 770065, upload-time = "2026-05-22T14:40:10.174Z" },
-    { url = "https://files.pythonhosted.org/packages/d8/02/8075215d77024cf6e1c38bc037c8fe13501f36355c7bd10abe4e74e13741/pupil_labs_uvc-1.0.4-cp310-cp310-win_amd64.whl", hash = "sha256:d04525e2085c1112fad8a0edecca3f4b10c727db2e449465b9ad337457eba3d6", size = 976881, upload-time = "2026-05-22T14:40:11.829Z" },
-    { url = "https://files.pythonhosted.org/packages/66/90/7ef3e8a44b765a8530183bd41eeb8983b1385cce65e6709a176ed0a454b2/pupil_labs_uvc-1.0.4-cp311-cp311-macosx_15_0_arm64.whl", hash = "sha256:cbb41708d090231127f9b866d2c7f989df3b6661ae823297fa7c99231a366172", size = 514523, upload-time = "2026-05-22T14:40:13.256Z" },
-    { url = "https://files.pythonhosted.org/packages/a3/da/7996b5bb493dea73c61468740492a2e78dbf280fc83578142b59f4a944fd/pupil_labs_uvc-1.0.4-cp311-cp311-manylinux2014_aarch64.manylinux_2_17_aarch64.whl", hash = "sha256:3aeee47d00ba58e10a50eb6321f8b53c94581a7fed5de98795ae3c50311b9a79", size = 1092263, upload-time = "2026-05-22T14:40:15.118Z" },
-    { url = "https://files.pythonhosted.org/packages/4b/d3/a022ad7d22f92a0d2e5f4ccb8247848a5b05358029b11d0fb3606db452a1/pupil_labs_uvc-1.0.4-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.whl", hash = "sha256:d412f61f16c79e4a76de6d50f0448beb08dc6441370073aaf959e58de01ff3ed", size = 1123380, upload-time = "2026-05-22T14:40:16.545Z" },
-    { url = "https://files.pythonhosted.org/packages/94/f3/9feb452efdd48dcce84ae81dd13d2735ed8b1f37686e4ed5e6641be3844b/pupil_labs_uvc-1.0.4-cp311-cp311-musllinux_1_2_aarch64.whl", hash = "sha256:8bd2cb5a9022e6fb42ab45fe61306cb3fe4c655b3e0d0e84584e0ad01752a6be", size = 769801, upload-time = "2026-05-22T14:40:18.074Z" },
-    { url = "https://files.pythonhosted.org/packages/88/b8/a573328d3774ea9dd57a4fcf5335bad39f533b29d08f37a81d997dc58d4e/pupil_labs_uvc-1.0.4-cp311-cp311-musllinux_1_2_x86_64.whl", hash = "sha256:6f3abb41de575960b3287926e7be397c2dffdea666e5e79bdfc057dfe62a223a", size = 768615, upload-time = "2026-05-22T14:40:19.837Z" },
-    { url = "https://files.pythonhosted.org/packages/a2/69/dca749facbd9f5904c77159694812f08e7284a1de897037d509d3b17d1b1/pupil_labs_uvc-1.0.4-cp311-cp311-win_amd64.whl", hash = "sha256:975ae6409a6fce4918e2cfd85d09033a6058dfdc1100daf2207bc610372f0a09", size = 976629, upload-time = "2026-05-22T14:40:21.574Z" },
-    { url = "https://files.pythonhosted.org/packages/a8/c2/4ddecbeca1f4e198f3ad3eee48ca6b41b866eadf309bbaa416966c7a574a/pupil_labs_uvc-1.0.4-cp312-cp312-macosx_15_0_arm64.whl", hash = "sha256:a9d3387ea2119c1552927768c475a622e5b2632957fc09776aa70f6bb5f6267d", size = 512440, upload-time = "2026-05-22T14:40:22.97Z" },
-    { url = "https://files.pythonhosted.org/packages/d6/e1/f8884a781a9781341c14af640c20a946c6c6167b33c5bbb39b99830bee43/pupil_labs_uvc-1.0.4-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.whl", hash = "sha256:ab26ef426780661656ba5f67d0a893f4b65eaff53998774f127e750035252492", size = 1073789, upload-time = "2026-05-22T14:40:24.348Z" },
-    { url = "https://files.pythonhosted.org/packages/df/69/3b78465fa1bd5029ef1d91689e0ca878351633fb8d6531c8f51c51ad4980/pupil_labs_uvc-1.0.4-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl", hash = "sha256:8dabd239ec1134b46495f530660fa98ffbe18551315e14a6c80d4a968883a3d1", size = 1105301, upload-time = "2026-05-22T14:40:26.112Z" },
-    { url = "https://files.pythonhosted.org/packages/30/d9/1f29a4e22a20fe3d689cf91ac92190556f32fb0b33ff77699f6d8d259a44/pupil_labs_uvc-1.0.4-cp312-cp312-musllinux_1_2_aarch64.whl", hash = "sha256:c024bff7637935869dafdf6a1c3d98b6c6026ef0ca5509eb44a3198006e5e086", size = 752067, upload-time = "2026-05-22T14:40:27.891Z" },
-    { url = "https://files.pythonhosted.org/packages/35/7f/96d17520b0b37b23f0d2c065029b6772c704aa0cbb4f3cc709a05f350915/pupil_labs_uvc-1.0.4-cp312-cp312-musllinux_1_2_x86_64.whl", hash = "sha256:254e1f3c3405814195360787f5522f1ae0e0198bbe67d1289ce429787c09d76d", size = 751356, upload-time = "2026-05-22T14:40:29.348Z" },
-    { url = "https://files.pythonhosted.org/packages/27/34/7b924bd80760c9fbd19dbe536b63b56a6e75ceeb494ef60199598045a6f6/pupil_labs_uvc-1.0.4-cp312-cp312-win_amd64.whl", hash = "sha256:7e98d95de8a3a76dbee509132e8fdd3c91b239f8b984f9c3d3af5e0418d523a6", size = 969345, upload-time = "2026-05-22T14:40:30.814Z" },
-    { url = "https://files.pythonhosted.org/packages/75/30/2873f920e930f461bc963df7afd8e4a2e2b25803938bdcceec1c2983ad57/pupil_labs_uvc-1.0.4-cp313-cp313-macosx_15_0_arm64.whl", hash = "sha256:b64e221ced98d645e1e41933f2116e2c944fd58be0ffff48372e904e8ec88d14", size = 511535, upload-time = "2026-05-22T14:40:32.728Z" },
-    { url = "https://files.pythonhosted.org/packages/c1/5c/4cc04796b908594fe97b429ce6e74eb1ccdd62d205c4b2ef4fb1da414d67/pupil_labs_uvc-1.0.4-cp313-cp313-manylinux2014_aarch64.manylinux_2_17_aarch64.whl", hash = "sha256:00e154bcbe87ed5c90f4b64c9cca71ff678b736acfc8685cb1d320efa61fa520", size = 1074783, upload-time = "2026-05-22T14:40:34.78Z" },
-    { url = "https://files.pythonhosted.org/packages/b6/e4/1da0a0fa75256d3873b212720ae455e45a5f9811649421318cdcbde42792/pupil_labs_uvc-1.0.4-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.whl", hash = "sha256:252e1120bc39eea9ac3375660c9123ba60ab7b7639c340afcdde6e3136537dac", size = 1106118, upload-time = "2026-05-22T14:40:36.36Z" },
-    { url = "https://files.pythonhosted.org/packages/e0/da/fb789d3e13a11d2b4560f399a2a328310455fb4e88d27068bc1c4b6e924b/pupil_labs_uvc-1.0.4-cp313-cp313-musllinux_1_2_aarch64.whl", hash = "sha256:12076f36490e7cff8dffd89a2aa28b8be7caca8b3e16b40b5b54023dc51319d5", size = 753291, upload-time = "2026-05-22T14:40:38.99Z" },
-    { url = "https://files.pythonhosted.org/packages/ee/db/dc6d9e6d43711ec023e8ff72fe89f4b2a66ade363d838d3ccf21d54de2a0/pupil_labs_uvc-1.0.4-cp313-cp313-musllinux_1_2_x86_64.whl", hash = "sha256:7fc43918554f64239f9481f76650f2f3824ea509b4bc5b958c8ae316f65037d6", size = 752751, upload-time = "2026-05-22T14:40:40.384Z" },
-    { url = "https://files.pythonhosted.org/packages/83/67/3cce3939a257d468486b1a574fd88d64d4249e23e23339fa9e04ae0d8f34/pupil_labs_uvc-1.0.4-cp313-cp313-win_amd64.whl", hash = "sha256:b5230b68d5022cf94307060838534df89a6793f19c67d35f3a017fbc7e1c0c59", size = 970161, upload-time = "2026-05-22T14:40:41.806Z" },
+    { url = "https://files.pythonhosted.org/packages/ac/7d/81e4dca182032caa1dc4150c7a2fd47200550f62f729d330c6da32ff9fbf/pupil_labs_uvc-1.0.6-cp310-cp310-macosx_15_0_arm64.whl", hash = "sha256:7ab6823878f21f1c00a6e934376d6ea1a90201702b4b76d02fa377cc0ade7ac8", size = 592153, upload-time = "2026-09-25T14:35:49.038Z" },
+    { url = "https://files.pythonhosted.org/packages/94/3b/5179803373296a101104cf3f75a44e02f3fb4748b0048397e18f50581e11/pupil_labs_uvc-1.0.6-cp310-cp310-manylinux_2_28_aarch64.whl", hash = "sha256:3f5c803fd6e38c3e88974be75f1245977f7122ec1d86ab7c3c8f33be2f4e1375", size = 1660031, upload-time = "2026-09-25T14:35:50.584Z" },
+    { url = "https://files.pythonhosted.org/packages/95/27/eb57687d88d983b41995a70adec84b7f415f6336c4aadd68e28acbb81f1b/pupil_labs_uvc-1.0.6-cp310-cp310-manylinux_2_28_x86_64.whl", hash = "sha256:ffcc3751c9de422dacb85ccc7edb01c4572f30875f9deb4e37aaf0aed2694854", size = 1694957, upload-time = "2026-09-25T14:35:52.207Z" },
+    { url = "https://files.pythonhosted.org/packages/02/f7/93cd58efc1ba404b06df32322b2d939a43d1482b65cbe3644f65595c6afe/pupil_labs_uvc-1.0.6-cp310-cp310-musllinux_1_2_aarch64.whl", hash = "sha256:1e99f7519539887a793a92e81bed175d1cb081fab3dd7581471a154e5a7c5850", size = 781115, upload-time = "2026-09-25T14:35:53.557Z" },
+    { url = "https://files.pythonhosted.org/packages/e3/9f/33640e0098fbe619e168675d2ba84939ac04fb30965038f05535f0070136/pupil_labs_uvc-1.0.6-cp310-cp310-musllinux_1_2_x86_64.whl", hash = "sha256:75c95118f80718542b43515804860568457d845fc42a325c85e4f3218dc08cb4", size = 780809, upload-time = "2026-09-25T14:35:55.104Z" },
+    { url = "https://files.pythonhosted.org/packages/0e/5e/f3399d58094eeaa643f0b6c4423ed21d3159c8016b63206b41641a8297ab/pupil_labs_uvc-1.0.6-cp310-cp310-win_amd64.whl", hash = "sha256:39974cd800fc22bbb6515644535fdfad1d8df74b54b3b63603575433fa8fc77c", size = 981516, upload-time = "2026-09-25T14:35:56.697Z" },
+    { url = "https://files.pythonhosted.org/packages/72/16/e969e15f33124cf55f0964b2ed5a927410b50a38ac569214a7c0b5dabce3/pupil_labs_uvc-1.0.6-cp311-cp311-macosx_15_0_arm64.whl", hash = "sha256:d59422019ce8a9fe3ea6ee406795f13dc4be653be02d4d6041bdc06118d6c499", size = 591060, upload-time = "2026-09-25T14:35:58.197Z" },
+    { url = "https://files.pythonhosted.org/packages/da/7a/09b7f12f1ad87593396ddcffa8e25948af72a042e2a7ae28cb1303e12f76/pupil_labs_uvc-1.0.6-cp311-cp311-manylinux_2_28_aarch64.whl", hash = "sha256:ef6993c1bb2d52b7f2b3559b7c71970db1520e0c29ddf806338d38052f8021ce", size = 1658311, upload-time = "2026-09-25T14:35:59.66Z" },
+    { url = "https://files.pythonhosted.org/packages/d2/55/c8ccc30a92eb8f8c26bffb805c56f81808a09f1cdea55525b654dd974474/pupil_labs_uvc-1.0.6-cp311-cp311-manylinux_2_28_x86_64.whl", hash = "sha256:b400db115cd9f46a022424ecb76288cc3545d8d6cd5c59f3225d0a33d697922e", size = 1693900, upload-time = "2026-09-25T14:36:01.218Z" },
+    { url = "https://files.pythonhosted.org/packages/81/00/f974c06952d1488f529b8b3d45073f49c67afa0b5345d9723cad452728a8/pupil_labs_uvc-1.0.6-cp311-cp311-musllinux_1_2_aarch64.whl", hash = "sha256:6c2613e8c3c14759a125254fe83c212b85fae468c9de8fcc59e0868f7f30894b", size = 779343, upload-time = "2026-09-25T14:36:02.659Z" },
+    { url = "https://files.pythonhosted.org/packages/1a/40/5dc0337773f7a46c825ca9893f77f6ca2f1b1e91d77787be0981cb0799f6/pupil_labs_uvc-1.0.6-cp311-cp311-musllinux_1_2_x86_64.whl", hash = "sha256:04476c092f6cd7264d694d9c8c1345384a028f401d57fdfbc43b3a7c8973c6f6", size = 780321, upload-time = "2026-09-25T14:36:04.009Z" },
+    { url = "https://files.pythonhosted.org/packages/f2/bd/bcf75014a63945d4d6ef63cf535ce9ada8d0811ae59c02b2736e0f8b7a59/pupil_labs_uvc-1.0.6-cp311-cp311-win_amd64.whl", hash = "sha256:caced3bbf028ffdc2e17a2180e43be12a93557c9609835be26c614bb0fe5f607", size = 981088, upload-time = "2026-09-25T14:36:05.582Z" },
+    { url = "https://files.pythonhosted.org/packages/fb/6f/1bd0475bc772094a1e8a2db8347c0d175d706a9ab78b8471d7b87bd64998/pupil_labs_uvc-1.0.6-cp312-cp312-macosx_15_0_arm64.whl", hash = "sha256:7a32b3d78253feffbe13a30cd9e50bb9c7097d99247c06603e14cf6790004723", size = 587184, upload-time = "2026-09-25T14:36:07.125Z" },
+    { url = "https://files.pythonhosted.org/packages/ca/89/6025c34ffde2521c803ae1666a6f3f2e7ab59182ae61ba6c553fc116dcdb/pupil_labs_uvc-1.0.6-cp312-cp312-manylinux_2_28_aarch64.whl", hash = "sha256:040b74459ec368ba59a5fa7e41ee2c1667a379bbc861549c61f280f522a6c7bd", size = 1644159, upload-time = "2026-09-25T14:36:08.453Z" },
+    { url = "https://files.pythonhosted.org/packages/a0/60/e982a6a1785f27986ffbe379c20d980051fa8992e7ecd9a58cb0a5efdba5/pupil_labs_uvc-1.0.6-cp312-cp312-manylinux_2_28_x86_64.whl", hash = "sha256:6cd629d1c2aa2924d1844bb329463a147b7bd601cb86b613f34ee8b16962718c", size = 1679634, upload-time = "2026-09-25T14:36:09.953Z" },
+    { url = "https://files.pythonhosted.org/packages/84/3f/a27aaafd3a8ae23d02a61f03a135d9703110ae57bc4767f5bb52e42c27e7/pupil_labs_uvc-1.0.6-cp312-cp312-musllinux_1_2_aarch64.whl", hash = "sha256:4c9c1ffb1181ed0585177807cd5f1c2258986420550e197e820a98550c3676e2", size = 765094, upload-time = "2026-09-25T14:36:11.374Z" },
+    { url = "https://files.pythonhosted.org/packages/30/4c/f1b7f1c319f3ee86cccbd242346c46b6bf269996b8257938cf2e0be96494/pupil_labs_uvc-1.0.6-cp312-cp312-musllinux_1_2_x86_64.whl", hash = "sha256:26fe87a43605f7cb05fa57182d5dd13fffe9541bba60e71225de79d3625d3f9d", size = 766112, upload-time = "2026-09-25T14:36:12.681Z" },
+    { url = "https://files.pythonhosted.org/packages/61/fe/a40bda7c0adfe15e8342b31c18e0f3ff9f11ce63da5a29be6c0aab793610/pupil_labs_uvc-1.0.6-cp312-cp312-win_amd64.whl", hash = "sha256:cc3c7489758445af93e91a3caf1e34a0b07e85cbf68727067e4efb629b4c4c98", size = 976208, upload-time = "2026-09-25T14:36:14.081Z" },
+    { url = "https://files.pythonhosted.org/packages/5d/21/f64916dd6e5fc649cf68803a0d58e411af200d0f960c70f0758ef04b7c93/pupil_labs_uvc-1.0.6-cp313-cp313-macosx_15_0_arm64.whl", hash = "sha256:423b1b977db88f292e7134341d56a4188b9923e3be97eb33bee664420c29dc13", size = 589051, upload-time = "2026-09-25T14:36:15.503Z" },
+    { url = "https://files.pythonhosted.org/packages/da/e1/a108cafce89db1a84108fcf078e9d6bda359bacdde3b894aa971f2e907cf/pupil_labs_uvc-1.0.6-cp313-cp313-manylinux_2_28_aarch64.whl", hash = "sha256:1e6470715626a0de68f15f3a6ef36f18d40db8c15d49405b3a39cd274655f742", size = 1642948, upload-time = "2026-09-25T14:36:17.168Z" },
+    { url = "https://files.pythonhosted.org/packages/a2/58/e7df896b835d94d6807980eb9a5572b859f239d4e95ec9fc707f33849fcd/pupil_labs_uvc-1.0.6-cp313-cp313-manylinux_2_28_x86_64.whl", hash = "sha256:10ba096e6ad9be18c6b32957562a89eb289ecb7bbbf70f3045ea464f05ac6fe9", size = 1678293, upload-time = "2026-09-25T14:36:18.878Z" },
+    { url = "https://files.pythonhosted.org/packages/67/89/56b597d538c5a4a9c82b85f4e832588ac24c8ebe2ec091ac0c2eb1b9461b/pupil_labs_uvc-1.0.6-cp313-cp313-musllinux_1_2_aarch64.whl", hash = "sha256:c7f4f7c4d32a27308a7f9ef47c6e541827d3b13545e80bdec562d166ba040c49", size = 763920, upload-time = "2026-09-25T14:36:20.31Z" },
+    { url = "https://files.pythonhosted.org/packages/e3/e4/87ce055a9c40e3e99cc000510deb86eb456c713bec5fe2a5d14e98a79728/pupil_labs_uvc-1.0.6-cp313-cp313-musllinux_1_2_x86_64.whl", hash = "sha256:bb4c3a18c9f70760cb235d1965a50d76c7d178f3af771faf893f76946d458816", size = 765062, upload-time = "2026-09-25T14:36:21.671Z" },
+    { url = "https://files.pythonhosted.org/packages/4c/aa/d4be91f547ace533a845e0a52353bfb1a1ad4afbb93aa14ee19f4482cf68/pupil_labs_uvc-1.0.6-cp313-cp313-win_amd64.whl", hash = "sha256:bcb09a89fb94807a3d861aec3e5467828ddb0dae71b3ec5a104bd12f69a3164b", size = 975818, upload-time = "2026-09-25T14:36:23.063Z" },
 ]
 
 [[package]]
@@ -1918,7 +1950,8 @@ name = "pymdown-extensions"
 version = "12.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "markdown" },
+    { name = "markdown", version = "3.10.3", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
+    { name = "markdown", version = "3.11", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11'" },
     { name = "pyyaml" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/2a/94/858e0163cb4d83d6d8234018a01792c749a56daee41794cac7d6c46661e8/pymdown_extensions-12.1.tar.gz", hash = "sha256:fdb8f47f5d7fd069d10ef2a7d8908e613d7865ff0419d544a0ffd3984e884f11", size = 868245, upload-time = "2026-09-23T00:08:42Z" }
