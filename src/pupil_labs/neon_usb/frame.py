@@ -1,3 +1,4 @@
+import warnings
 from dataclasses import dataclass
 
 import cv2
@@ -28,3 +29,18 @@ class Frame:
         if self.img.shape[2] == 3:
             return self.img
         raise ValueError("Unsupported image format for BGR conversion")
+
+    @property
+    def timestamp(self) -> float:
+        """Timestamp in seconds since Unix epoch.
+
+        .. deprecated::
+            Use :attr:`time` instead.
+        """
+        warnings.warn(
+            "Frame.timestamp is deprecated, use Frame.time "
+            "(nanoseconds since Unix epoch) instead",
+            DeprecationWarning,
+            stacklevel=2,
+        )
+        return self.time / 1e9
