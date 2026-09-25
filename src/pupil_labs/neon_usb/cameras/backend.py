@@ -1,3 +1,4 @@
+import time
 from abc import ABC, abstractmethod
 from pathlib import Path
 from typing import Any
@@ -5,7 +6,6 @@ from typing import Any
 import cv2
 import numpy as np
 import uvc
-import time
 from typing_extensions import Self
 
 from pupil_labs.neon_usb.pyrav4l2 import Device, v4l2
@@ -16,7 +16,8 @@ from .camera import CameraNotFoundError, CameraSpec
 
 
 def _get_monotonic_utc_offset_ns() -> int:
-    """
+    """Offset to convert monotonic clock timestamps to UTC time.
+
     Both UVC and V4L2 backends return frame timestamps using host device's
     monotonic clock. To keep the timestamps monotoneous but convert them to
     UTC time, we apply a constant offset that is recorded before returning
@@ -51,7 +52,7 @@ class UVCBackend(CameraBackend):
         super().__init__(spec)
 
         self._uvc_capture = None
-        self._utc_offset_ns = None
+        self._utc_offset_ns: int | None = None
         self.spec = spec
         self.extended_controls = extended_controls
         self.exposure_controls = None
@@ -108,7 +109,7 @@ class UVCBackend(CameraBackend):
         frame = self._uvc_capture.get_frame(timeout=2.0)
         assert frame is not None
         utc_timestamp = int(frame.timestamp * 1e9) + self.utc_offset_ns
-        return Frame(frame.img, utc_timestamp, frame.index)
+        return Frame(frame.img, int(utc_timestamp), frame.index)
 
     def close(self) -> None:
         if self._uvc_capture is not None:
@@ -124,7 +125,7 @@ class V4l2Backend(CameraBackend):
         self.camera_reinit_timeout = 3
         self.device = None
         self.frame_counter = -1
-        self._utc_offset_ns = None
+        self._utc_offset_ns: int | None = None
 
         errors = {}
         for device_path in Path("/dev/").glob("video*"):
@@ -191,7 +192,7 @@ class V4l2Backend(CameraBackend):
         self.frame_counter += 1
 
         utc_timestamp = int(time_ns) + self.utc_offset_ns
-        return Frame(pixels, utc_timestamp, self.frame_counter)
+        return Frame(pixels, int(utc_timestamp), self.frame_counter)
 
     def close(self) -> None:
         self._fd.close()
