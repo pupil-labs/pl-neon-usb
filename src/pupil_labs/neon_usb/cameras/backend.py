@@ -1,3 +1,4 @@
+import time
 from abc import ABC, abstractmethod
 from pathlib import Path
 from typing import Any
@@ -12,6 +13,17 @@ from pupil_labs.neon_usb.pyrav4l2 import Device, v4l2
 from ..frame import Frame
 from ..v4lstream import V4lStream
 from .camera import CameraNotFoundError, CameraSpec
+
+
+def _get_monotonic_utc_offset_ns() -> int:
+    """Offset to convert monotonic clock timestamps to UTC time.
+
+    Both UVC and V4L2 backends return frame timestamps using host device's
+    monotonic clock. To keep the timestamps monotoneous but convert them to
+    UTC time, we apply a constant offset that is recorded before returning
+    the first frame.
+    """
+    return time.time_ns() - time.monotonic_ns()
 
 
 class CameraBackend(ABC):
@@ -40,6 +52,7 @@ class UVCBackend(CameraBackend):
         super().__init__(spec)
 
         self._uvc_capture = None
+        self._utc_offset_ns: int | None = None
         self.spec = spec
         self.extended_controls = extended_controls
         self.exposure_controls = None
@@ -60,6 +73,9 @@ class UVCBackend(CameraBackend):
         capture = uvc.Capture(uid, self.extended_controls)
         capture.bandwidth_factor = self.spec.bandwidth_factor
 
+        if self.spec.clock_freq_override:
+            capture.clock_freq_override = self.spec.clock_freq_override
+
         mode_matched = False
         for mode in capture.available_modes:
             if (mode.width, mode.height, mode.fps) == (
@@ -79,13 +95,21 @@ class UVCBackend(CameraBackend):
                 f"None of the available modes matched: {capture.available_modes}!"
             )
 
+    @property
+    def utc_offset_ns(self) -> float:
+        if self._utc_offset_ns is None:
+            self._utc_offset_ns = _get_monotonic_utc_offset_ns()
+
+        return self._utc_offset_ns
+
     def get_frame(self) -> Frame:
         if self._uvc_capture is None:
             raise OSError("Camera not initialized!")
 
         frame = self._uvc_capture.get_frame(timeout=2.0)
         assert frame is not None
-        return Frame(frame.img, frame.timestamp, frame.index)
+        utc_timestamp = int(frame.timestamp * 1e9) + self.utc_offset_ns
+        return Frame(frame.img, int(utc_timestamp), frame.index)
 
     def close(self) -> None:
         if self._uvc_capture is not None:
@@ -101,6 +125,7 @@ class V4l2Backend(CameraBackend):
         self.camera_reinit_timeout = 3
         self.device = None
         self.frame_counter = -1
+        self._utc_offset_ns: int | None = None
 
         errors = {}
         for device_path in Path("/dev/").glob("video*"):
@@ -142,6 +167,13 @@ class V4l2Backend(CameraBackend):
         if self.device is None:
             raise CameraNotFoundError(self.spec.name)
 
+    @property
+    def utc_offset_ns(self) -> float:
+        if self._utc_offset_ns is None:
+            self._utc_offset_ns = _get_monotonic_utc_offset_ns()
+
+        return self._utc_offset_ns
+
     def get_frame(self) -> Frame:
         frame = self.stream.get_frame()
         assert frame is not None, "Failed to get frame from stream!"
@@ -159,7 +191,8 @@ class V4l2Backend(CameraBackend):
 
         self.frame_counter += 1
 
-        return Frame(pixels, time_ns / 1e9, self.frame_counter)
+        utc_timestamp = int(time_ns) + self.utc_offset_ns
+        return Frame(pixels, int(utc_timestamp), self.frame_counter)
 
     def close(self) -> None:
         self._fd.close()

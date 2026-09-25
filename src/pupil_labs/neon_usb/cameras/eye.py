@@ -19,6 +19,7 @@ NEON_EYE_CAMERA_SPEC = CameraSpec(
     height=192,
     fps=200,
     bandwidth_factor=0,
+    clock_freq_override=48018650,
 )
 
 
@@ -43,7 +44,7 @@ class Exposure_Time:
             [3, 1, 1, 1, 1, 1, 1, 3],
         ])
         self.smooth = 1 / 3
-        self.check_freq = 0.1 / 3
+        self.check_freq = 1e9 / 30
         self.last_check_timestamp: float | None = None
 
     def calculate_based_on_frame(
@@ -53,6 +54,7 @@ class Exposure_Time:
             self.last_check_timestamp = timestamp
 
         if timestamp - self.last_check_timestamp > self.check_freq:
+            self.last_check_timestamp = timestamp
             if self.mode == "manual":
                 self.last_ETs = [self.ET_thres[1]] * 2
                 return [self.ET_thres[1]] * 2
@@ -121,18 +123,22 @@ class EyeCamera(Camera):
         self.exposure_algorithm: Exposure_Time | None = Exposure_Time(
             max_ET=28, frame_rate=200, mode="auto"
         )
+        self._last_written_exposures: list[int | None] = [None, None]
 
     def get_frame(self) -> Frame:
         frame = super().get_frame()
 
         if self.exposure_algorithm is not None:
             exposure_times = self.exposure_algorithm.calculate_based_on_frame(
-                frame.timestamp, frame.gray
+                frame.time, frame.gray
             )
 
             if exposure_times is not None:
                 for side_idx, exposure_time in enumerate(exposure_times):
-                    self._set_eye_exposure(side_idx, int(exposure_time))
+                    exposure_time = int(exposure_time)
+                    if self._last_written_exposures[side_idx] != exposure_time:
+                        self._set_eye_exposure(side_idx, exposure_time)
+                        self._last_written_exposures[side_idx] = exposure_time
 
         return frame
 

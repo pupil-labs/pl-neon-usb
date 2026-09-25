@@ -21,6 +21,7 @@ NEON_SCENE_CAMERA_SPEC = CameraSpec(
     height=1200,
     fps=30,
     bandwidth_factor=1.2,
+    clock_freq_override=15005835,
 )
 
 
